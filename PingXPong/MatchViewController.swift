@@ -8,30 +8,34 @@
 import UIKit
 
 class MatchViewController: UIViewController {
-
+    
+    @IBOutlet weak var labelPlayer1: UILabel!
+    @IBOutlet weak var labelPlayer2: UILabel!
+    @IBOutlet weak var labelScore1: UILabel!
+    @IBOutlet weak var labelScore2: UILabel!
+    @IBOutlet weak var textViewScores: UITextView!
+    
+    var player1: String? = "Jogador 1"
+    var player2: String? = "Jogador 2"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Tela 2: viewDidLoad")
+        textViewScores.text = ""
+        labelPlayer1.text = player1
+        labelPlayer2.text = player2
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("Tela 2: viewWillAppear")
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("Tela 2: viewDidAppear")
+    @IBAction func addScore(_ sender: UIButton) {
+        let label = sender.tag == 1 ? labelScore1 : labelScore2
+        
+        let score = Int(label!.text!) ?? 0
+        label?.text = "\(score + 1)"
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        print("Tela 2: viewWillDisappear")
+    @IBAction func showScores(_ sender: UIButton) {
+        textViewScores.text += "\(player1!) (\(labelScore1.text!)) x (\(labelScore2.text!)) \(player2!)\n"
+        
+        labelScore1.text = "0"
+        labelScore2.text = "0"
     }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        print("Tela 2: viewDidDisappear")
-    }
-
 }
